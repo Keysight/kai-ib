@@ -1,39 +1,39 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "\n    Stack creating a VPC and launch EC2 instances within it.\n    **WARNING** This template creates Amazon EC2 instances.\n    You will be billed for the AWS resources used if you create\n    a stack from this template. **WARNING** This template creates\n    role for the launching/deleting instances/subnets/interfaces.\n    This role will invoke AWSLambdaBasicExecutionRole, please see\n    AWS Documentation for details on AWSLambdaBasicExecutionRole.",
+    "Description": "\n    Stack creating a VPC and launch EC2 instances within it.\n    Deploys KAI-IB Controller and Client Agent.\n    **WARNING** This template creates Amazon EC2 instances.\n    You will be billed for the AWS resources used if you create\n    a stack from this template. **WARNING** This template creates\n    role for the launching/deleting instances/subnets/interfaces.\n    This role will invoke AWSLambdaBasicExecutionRole, please see\n    AWS Documentation for details on AWSLambdaBasicExecutionRole.",
     "Mappings": {
         "RegionMap": {
             "us-east-1": {
-                "AMIxAPPLICATION": "ami-0f44ffed3b4a3ce71",
-                "AMIxBROKER": "ami-0909b7d898b3a999e",
-                "AMIxAGENT": "ami-059deaedb3e162592",
+                "AMIxAPPLICATION": "ami-0168f40ac4feb44f9",
+                "AMIxBROKER": "ami-0ec0b07addf6af1e9",
+                "AMIxAGENT": "ami-02ee690e61ef5a6b6",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "18.206.107.24/29",
                 "EC2xREGION": "US East (N. Virginia)",
                 "REGIONxTAG": "US_EAST_1"
             },
             "us-east-2": {
-                "AMIxAPPLICATION": "ami-05aecfdc5e319d630",
-                "AMIxBROKER": "ami-0bade8dd1cdaec0a8",
-                "AMIxAGENT": "ami-0a3ca679c787c9c17",
+                "AMIxAPPLICATION": "ami-0964d2b5eac66df92",
+                "AMIxBROKER": "ami-04064bdd26bdf9f85",
+                "AMIxAGENT": "ami-067d1c0d58f3c415c",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "3.16.146.0/29",
                 "EC2xREGION": "US East (Ohio)",
                 "REGIONxTAG": "US_EAST_2"
             },
             "us-west-1": {
-                "AMIxAPPLICATION": "ami-03d001b56df14068b",
-                "AMIxBROKER": "ami-0c981903577519032",
-                "AMIxAGENT": "ami-06c45fa4958a8cf41",
+                "AMIxAPPLICATION": "ami-042dcea101433334e",
+                "AMIxBROKER": "ami-08be48b56c0597a2a",
+                "AMIxAGENT": "ami-04b5b980207111f60",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.52.6.112/29",
                 "EC2xREGION": "US West (N. California)",
                 "REGIONxTAG": "US_WEST_1"
             },
             "us-west-2": {
-                "AMIxAPPLICATION": "ami-03c07f3c27deb58e4",
-                "AMIxBROKER": "ami-09bf25a25a68a0363",
-                "AMIxAGENT": "ami-05a8a254e4c31161b",
+                "AMIxAPPLICATION": "ami-093a95ad5bb3fc878",
+                "AMIxBROKER": "ami-01c14927d2bcb60fc",
+                "AMIxAGENT": "ami-01df4bfd85fa123c6",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "18.237.140.160/29",
                 "EC2xREGION": "US West (Oregon)",
@@ -49,108 +49,108 @@
                 "REGIONxTAG": "AP_EAST_1"
             },
             "ap-south-1": {
-                "AMIxAPPLICATION": "ami-07976969d58316518",
-                "AMIxBROKER": "ami-0320e5304059fad3c",
-                "AMIxAGENT": "ami-0915eb2e73567482f",
+                "AMIxAPPLICATION": "ami-062a78d7ede275d89",
+                "AMIxBROKER": "ami-0d3e9b7e1d0c4a127",
+                "AMIxAGENT": "ami-099dc679f0588a5cf",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.233.177.0/29",
                 "EC2xREGION": "Asia Pacific (Mumbai)",
                 "REGIONxTAG": "AP_SOUTH_1"
             },
             "ap-south-2": {
-                "AMIxAPPLICATION": "ami-0b837f2ead59fd635",
-                "AMIxBROKER": "ami-011857eb70068aed2",
-                "AMIxAGENT": "ami-05a4d43be857e5b27",
+                "AMIxAPPLICATION": "ami-0ad49e55a3285b895",
+                "AMIxBROKER": "ami-0995949e52f0cc98e",
+                "AMIxAGENT": "ami-046ef19e6e1a446c4",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.233.177.0/29",
                 "EC2xREGION": "Asia Pacific (Hyderabad)",
                 "REGIONxTAG": "AP_SOUTH_2"
             },
             "ap-northeast-2": {
-                "AMIxAPPLICATION": "ami-0c401587660e3fc8b",
-                "AMIxBROKER": "ami-0dec18ca3e5948458",
-                "AMIxAGENT": "ami-0ce2605295d7d862e",
+                "AMIxAPPLICATION": "ami-0ae9f05b0be0d6926",
+                "AMIxBROKER": "ami-05f214180734b0403",
+                "AMIxAGENT": "ami-0b9f651dfb228ee81",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.209.1.56/29",
                 "EC2xREGION": "Asia Pacific (Seoul)",
                 "REGIONxTAG": "AP_NORTHEAST_2"
             },
             "ap-southeast-1": {
-                "AMIxAPPLICATION": "ami-03e9ee242cf9f0502",
-                "AMIxBROKER": "ami-0916d3d9d25ecd7b9",
-                "AMIxAGENT": "ami-09feedd65e5beb359",
+                "AMIxAPPLICATION": "ami-00c654a659f3aced7",
+                "AMIxBROKER": "ami-094a11a440a9f1b34",
+                "AMIxAGENT": "ami-0cf4afc3c8d74c18d",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "3.0.5.32/29",
                 "EC2xREGION": "Asia Pacific (Singapore)",
                 "REGIONxTAG": "AP_SOUTHEAST_1"
             },
             "ap-southeast-2": {
-                "AMIxAPPLICATION": "ami-0d38ab806224b5d0d",
-                "AMIxBROKER": "ami-0a5d216fa4866fed2",
-                "AMIxAGENT": "ami-08a18520bcb1d3514",
+                "AMIxAPPLICATION": "ami-07671ca503b2386ab",
+                "AMIxBROKER": "ami-061fcd62dbb667935",
+                "AMIxAGENT": "ami-068edf06d517ab8b1",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.239.158.0/29",
                 "EC2xREGION": "Asia Pacific (Sydney)",
                 "REGIONxTAG": "AP_SOUTHEAST_2"
             },
             "ap-northeast-1": {
-                "AMIxAPPLICATION": "ami-0a1e33bf60a7bf5d8",
-                "AMIxBROKER": "ami-0e112a32ea1fd3977",
-                "AMIxAGENT": "ami-0ba153033df2037ab",
+                "AMIxAPPLICATION": "ami-028b61a27b1d6321c",
+                "AMIxBROKER": "ami-07e7cb41376f75818",
+                "AMIxAGENT": "ami-026bb79807faf4ab9",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "3.112.23.0/29",
                 "EC2xREGION": "Asia Pacific (Tokyo)",
                 "REGIONxTAG": "AP_NORTHEAST_1"
             },
             "ca-central-1": {
-                "AMIxAPPLICATION": "ami-0014e8c59ba840472",
-                "AMIxBROKER": "ami-021cf7f4cf5c19495",
-                "AMIxAGENT": "ami-0923abe5511a3add2",
+                "AMIxAPPLICATION": "ami-0aa52c0c123e93aaf",
+                "AMIxBROKER": "ami-009539c7bda3de642",
+                "AMIxAGENT": "ami-071eb2e38b4049887",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "35.183.92.176/29",
                 "EC2xREGION": "Canada (Central)",
                 "REGIONxTAG": "CA_CENTRAL_1"
             },
             "eu-central-1": {
-                "AMIxAPPLICATION": "ami-0c71e6036afbbbb2f",
-                "AMIxBROKER": "ami-0e3051a781eae53e3",
-                "AMIxAGENT": "ami-0374e91052e0d0eaf",
+                "AMIxAPPLICATION": "ami-08a0f7c948016ac93",
+                "AMIxBROKER": "ami-045bd58ea8c4dcfa6",
+                "AMIxAGENT": "ami-01b3dad28d0f3f5bd",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "3.120.181.40/29",
                 "EC2xREGION": "EU (Frankfurt)",
                 "REGIONxTAG": "EU_CENTRAL_1"
             },
             "eu-west-1": {
-                "AMIxAPPLICATION": "ami-0a25726ed071ba3b9",
-                "AMIxBROKER": "ami-07af7eb8dd34307fe",
-                "AMIxAGENT": "ami-007c6b5ad2d62fb05",
+                "AMIxAPPLICATION": "ami-0a96010daffce02bd",
+                "AMIxBROKER": "ami-0293a7facd211b3b7",
+                "AMIxAGENT": "ami-00544551fc6d248d3",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "18.202.216.48/29",
                 "EC2xREGION": "EU (Ireland)",
                 "REGIONxTAG": "EU_WEST_1"
             },
             "eu-west-2": {
-                "AMIxAPPLICATION": "ami-02f7e0d1be953d8b0",
-                "AMIxBROKER": "ami-08938c1aa97313ab6",
-                "AMIxAGENT": "ami-072ef080c323a4a4e",
+                "AMIxAPPLICATION": "ami-0278881a4fb52f8ec",
+                "AMIxBROKER": "ami-018a1a21637e31b3b",
+                "AMIxAGENT": "ami-0748c127999a15bca",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "3.8.37.24/29",
                 "EC2xREGION": "EU (London)",
                 "REGIONxTAG": "EU_WEST_2"
             },
             "eu-west-3": {
-                "AMIxAPPLICATION": "ami-03e71f20643cafdfe",
-                "AMIxBROKER": "ami-063380c710105273a",
-                "AMIxAGENT": "ami-0f144f28cf3d3b943",
+                "AMIxAPPLICATION": "ami-073b6274d01a5cff5",
+                "AMIxBROKER": "ami-0abb986adf2160fec",
+                "AMIxAGENT": "ami-0035e1afc039864ef",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "35.180.112.80/29",
                 "EC2xREGION": "EU (Paris)",
                 "REGIONxTAG": "EU_WEST_3"
             },
             "eu-north-1": {
-                "AMIxAPPLICATION": "ami-02b8f8cab6de226f5",
-                "AMIxBROKER": "ami-0a32abd8651d42b4e",
-                "AMIxAGENT": "ami-0276493cefaf9c1b5",
+                "AMIxAPPLICATION": "ami-04d72473af4a48707",
+                "AMIxBROKER": "ami-08406d2e83568248c",
+                "AMIxAGENT": "ami-0505e29e35daac4f9",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.48.4.200/30",
                 "EC2xREGION": "EU (Stockholm)",
@@ -166,9 +166,9 @@
                 "REGIONxTAG": "ME_SOUTH_1"
             },
             "sa-east-1": {
-                "AMIxAPPLICATION": "ami-018b2263eb937e417",
-                "AMIxBROKER": "ami-0f6e5f2ffc58a0f61",
-                "AMIxAGENT": "ami-0cbba143b43c77496",
+                "AMIxAPPLICATION": "ami-03bc9c38bb8f3f8c3",
+                "AMIxBROKER": "ami-0cc24f66cb1e8265a",
+                "AMIxAGENT": "ami-0d9b980fc53d2de75",
                 "AMIxLICENSE": "ami-00000000000000000",
                 "EC2xCONNECTxCIDR": "13.48.4.200/30",
                 "EC2xREGION": "South America (Sao Paulo)",
@@ -178,7 +178,7 @@
         "VariableMap": {
             "global": {
                 "OPTIONSxTAG": "MANUAL",
-                "PROJECTxTAG": "CyPerf"
+                "PROJECTxTAG": "KAIIB"
             }
         }
     },
@@ -198,6 +198,7 @@
                         "Username",
                         "Project",
                         "VPCCIDR",
+                        "AvailabilityZone",
                         "AuthUsername",
                         "AuthPassword",
                         "AuthFingerprint"
@@ -205,56 +206,69 @@
                 },
                 {
                     "Label": {
-                        "default": "CyPerf Controller Configuration"
+                        "default": "KAIIB Controller Configuration"
                     },
                     "Parameters": [
-                        "ControllerManagementSubnet",
-                        "CyPerfUISecurityGroup"
+                        "ControllerAMI",
+                        "ControllerNetworkCIDR"
                     ]
                 },
                 {
                     "Label": {
-                        "default": "CyPerf Agent Configuration"
+                        "default": "KAIIB Agent Configuration"
                     },
                     "Parameters": [
+                        "AgentAMI",
                         "DeployClientAgent",
-                        "DeployServerAgent",
                         "EC2RoleForTags",
-                        "InstanceTypeForCyPerfAgent",
-                        "KeyNameForCyPerfAgent",
-                        "AgentControlSubnet",
-                        "AgentTestSubnet",
-                        "AgentSecurityGroup"
+                        "InstanceTypeForKAIIBAgent",
+                        "KeyNameForKAIIBAgent",
+                        "AgentControlCIDR",
+                        "AgentTestCIDR"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Security-Group Configuration"
+                    },
+                    "Parameters": [
+                        "AllowedSubnet"
                     ]
                 }
             ],
             "ParameterLabels": {
-                "InstanceTypeForCyPerfAgent": {
-                    "default": "Instance Type for CyPerf Agents"
+                "ControllerAMI": {
+                    "default": "KAIIB Controller AMI ID for the selected region"
                 },
-                "KeyNameForCyPerfAgent": {
+                "AgentAMI": {
+                    "default": "KAIIB Agent AMI ID for the selected region"
+                },
+                "EC2RoleForTags": {
+                    "default": "Display Agents by tags in KAIIB UI"
+                },
+                "AvailabilityZone": {
+                    "default": "Availability Zone"
+                },
+                "InstanceTypeForKAIIBAgent": {
+                    "default": "Instance Type for KAIIB Agents"
+                },
+                "KeyNameForKAIIBAgent": {
                     "default": "SSH Key"
                 },
                 "DeployClientAgent": {
                     "default": "Deploy Client Agent"
                 },
-                "DeployServerAgent": {
-                    "default": "Deploy Server Agent"
+                "ControllerNetworkCIDR": {
+                    "default": "Management Subnet for KAIIB Controller"
                 },
-                "ControllerManagementSubnet": {
-                    "default": "Management Subnet for CyPerf Controller"
+                "AgentControlCIDR": {
+                    "default": "Control Subnet for KAIIB Agents"
                 },
-                "AgentControlSubnet": {
-                    "default": "Control Subnet for CyPerf Agents"
+                "AllowedSubnet": {
+                    "default": "Allowed Subnet for Security Group"
                 },
-                "AgentTestSubnet": {
-                    "default": "Test Subnet for CyPerf Agents"
-                },
-                "CyPerfUISecurityGroup": {
-                    "default": "Security Group of CyPerf Contoller"
-                },
-                "AgentSecurityGroup": {
-                    "default": "Security Group of CyPerf Agent"
+                "AgentTestCIDR": {
+                    "default": "Test Subnet for KAIIB Agents"
                 },
                 "VPCCIDR": {
                     "default": "VPC"
@@ -272,15 +286,15 @@
         }
     },
     "Outputs": {
-        "CyPerfUIINstanceDNS": {
-            "Description": "DNS name of CyPerf Controller instance",
+        "KAIIBUIINstanceDNS": {
+            "Description": "DNS name of KAIIB Controller instance",
             "Value": {
                 "Fn::Join": [
                     "",
                     [
                         {
                             "Fn::GetAtt": [
-                                "CyPerfUI",
+                                "KAIIBUI",
                                 "PublicDnsName"
                             ]
                         }
@@ -290,49 +304,75 @@
         }
     },
     "Parameters": {
-        "InstanceTypeForCyPerfAgent": {
+        "ControllerAMI": {
+            "Default": "KAIIB-Controller-AMI",
+            "Description": "KAIIB Controller AMI ID",
+            "Type": "String"
+        },
+        "AgentAMI": {
+            "Default": "KAIIB-Agent-AMI",
+            "Description": "KAIIB Agent AMI ID",
+            "Type": "String"
+        },
+        "AvailabilityZone": {
+            "Default": "<Select preffered availability zone from drop down>",
+            "Description": "Preferred availability zone",
+            "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "InstanceTypeForKAIIBAgent": {
             "AllowedValues": [
                 "c5.2xlarge",
                 "c5n.9xlarge"
             ],
             "Default": "c5.2xlarge",
-            "Description": "CyPerf instance type",
+            "Description": "KAIIB instance type",
             "Type": "String"
         },
-        "CyPerfUISecurityGroup": {
-            "Default": "<Select CyPerf Controller security group from drop down list>",
-            "Description": "Preffered Existing Security group of CyPerf Controller",
-            "Type": "AWS::EC2::SecurityGroup::Id"
-        },
-        "AgentSecurityGroup": {
-            "Default": "<Select CyPerf Agent security group from drop down list>",
-            "Description": "Preffered Existing Security group of CyPerf Agent",
-            "Type": "AWS::EC2::SecurityGroup::Id"
-        },
-        "KeyNameForCyPerfAgent": {
+        "KeyNameForKAIIBAgent": {
             "ConstraintDescription": "must be the name of an existing EC2 KeyPair",
-            "Default": "CyPerf-keypair",
-            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the CyPerf instances",
+            "Default": "KAIIB-keypair",
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the KAIIB instances",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
-        "AgentControlSubnet": {
-            "Default": "<Select Control Subnet for CyPerf Agents from drop down list>",
-            "Description": "Preferred Existing Control subnet for CyPerf Agent",
-            "Type": "AWS::EC2::Subnet::Id"
+        "ControllerNetworkCIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Default": "172.16.1.0/24",
+            "Description": "This subnet is attached to KAIIB controller and would be used to access the KAIIB controllers' UI",
+            "MaxLength": "18",
+            "MinLength": "9",
+            "Type": "String"
         },
-        "AgentTestSubnet": {
-            "Default": "<Select Test Subnet for CyPerf Agents from drop down list>",
-            "Description": "Preferred Existing Test subnet for CyPerf Agent",
-            "Type": "AWS::EC2::Subnet::Id"
+        "AgentControlCIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Default": "172.16.2.0/24",
+            "Description": "KAIIB agents will use this subnet for control plane communication with controller",
+            "MaxLength": "18",
+            "MinLength": "9",
+            "Type": "String"
         },
-        "ControllerManagementSubnet": {
-            "Default": "<Select Management Subnet for CyPerf Controller from drop down list>",
-            "Description": "Preferred Existing Management subnet for CyPerf Controller.This subnet is attached to CyPerf controller and would be used to access the CyPerf controllers' UI",
-            "Type": "AWS::EC2::Subnet::Id"
+        "AllowedSubnet": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Default": "1.1.1.1/1",
+            "Description": "Subnet range allowed to access deployed AWS resources. Execute 'curl ifconfig.co' to know MyIP or google for \"what is my IP\"",
+            "MaxLength": "18",
+            "MinLength": "9",
+            "Type": "String"
         },
         "Project": {
-            "Default": "CyPerf-AWS",
+            "Default": "KAIIB-AWS",
             "Description": "Project Name",
+            "Type": "String"
+        },
+        "AgentTestCIDR": {
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Default": "172.16.3.0/24",
+            "Description": "KAIIB agents will use this subnet for test traffic",
+            "MaxLength": "18",
+            "MinLength": "9",
             "Type": "String"
         },
         "Username": {
@@ -341,9 +381,13 @@
             "Type": "String"
         },
         "VPCCIDR": {
-            "Default": "<Select VPC from drop down list>",
-            "Description": "Preferred Existing VPC",
-            "Type": "AWS::EC2::VPC::Id"
+            "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+            "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
+            "Default": "172.16.0.0/16",
+            "Description": "CIDR range for the VPC",
+            "MaxLength": "18",
+            "MinLength": "9",
+            "Type": "String"
         },
         "DeployClientAgent": {
             "Description": "Want to deploy Client Agent?",
@@ -355,19 +399,9 @@
             ],
             "ConstraintDescription": "must specify yes or no."
         },
-        "DeployServerAgent": {
-            "Description": "Want to deploy Server Agent?",
-            "Default": "yes",
-            "Type": "String",
-            "AllowedValues": [
-                "yes",
-                "no"
-            ],
-            "ConstraintDescription": "must specify yes or no."
-        },
         "EC2RoleForTags": {
-            "Description": "Display Agents by custom tags in CyPerf UI.",
-            "Default": "no",
+            "Description": "Display Agents by tags in KAIIB UI",
+            "Default": "yes",
             "Type": "String",
             "AllowedValues": [
                 "yes",
@@ -381,7 +415,7 @@
             "Type": "String"
         },
         "AuthPassword": {
-            "Default": "CyPerf&Keysight#1",
+            "Default": "admin",
             "Description": "Password for agent to controller authentication",
             "Type": "String"
         },
@@ -400,14 +434,6 @@
                 "yes"
             ]
         },
-        "CreateServerAgent": {
-            "Fn::Equals": [
-                {
-                    "Ref": "DeployServerAgent"
-                },
-                "yes"
-            ]
-        },
         "FetchTagsForAgent": {
             "Fn::Equals": [
                 {
@@ -418,6 +444,17 @@
         }
     },
     "Resources": {
+        "DhcpOptionsAssociation": {
+            "Properties": {
+                "DhcpOptionsId": {
+                    "Ref": "VPCxDhcpOptions"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::VPCDHCPOptionsAssociation"
+        },
         "EC2IfaceRole": {
             "Condition": "FetchTagsForAgent",
             "Properties": {
@@ -493,7 +530,200 @@
             },
             "Type": "AWS::IAM::InstanceProfile"
         },
-        "CyPerfUI": {
+        "DefaultEgress1": {
+            "Type": "AWS::EC2::SecurityGroupEgress",
+            "Properties": {
+                "GroupId": {
+                    "Fn::GetAtt": [
+                        "VPC",
+                        "DefaultSecurityGroup"
+                    ]
+                },
+                "IpProtocol": "-1",
+                "DestinationSecurityGroupId": {
+                    "Fn::GetAtt": [
+                        "VPC",
+                        "DefaultSecurityGroup"
+                    ]
+                }
+            }
+        },
+        "InternetGateway": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "-gateway"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::InternetGateway"
+        },
+        "InternetGatewayAttachment": {
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "InternetGateway"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::VPCGatewayAttachment"
+        },
+        "KAIIBUISecurityGroup": {
+            "Properties": {
+                "GroupDescription": "Allow restricted-access to launched Instances",
+                "SecurityGroupEgress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "Description": "All Traffic",
+                        "FromPort": "-1",
+                        "IpProtocol": "-1",
+                        "ToPort": "-1"
+                    }
+                ],
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": {
+                            "Ref": "AllowedSubnet"
+                        },
+                        "Description": "HTTPS Access",
+                        "FromPort": "443",
+                        "IpProtocol": "tcp",
+                        "ToPort": "443"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "AllowedSubnet"
+                        },
+                        "Description": "HTTP Access",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "AllowedSubnet"
+                        },
+                        "Description": "Grafana Access",
+                        "FromPort": "3000",
+                        "IpProtocol": "tcp",
+                        "ToPort": "3000"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "AllowedSubnet"
+                        },
+                        "Description": "Prometheus Access",
+                        "FromPort": "9090",
+                        "IpProtocol": "tcp",
+                        "ToPort": "9090"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "AllowedSubnet"
+                        },
+                        "Description": "SSH Access",
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "VPCCIDR"
+                        },
+                        "Description": "HTTPS from VPC",
+                        "FromPort": "443",
+                        "IpProtocol": "tcp",
+                        "ToPort": "443"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "VPCCIDR"
+                        },
+                        "Description": "HTTP from VPC",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "KAIIBUISG"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "KAIIBUI": {
             "DependsOn": [
                 "mdweth0"
             ],
@@ -508,17 +738,11 @@
                     }
                 ],
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "RegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "AMIxAPPLICATION"
-                    ]
+                    "Ref": "ControllerAMI"
                 },
                 "InstanceType": "c5.2xlarge",
                 "KeyName": {
-                    "Ref": "KeyNameForCyPerfAgent"
+                    "Ref": "KeyNameForKAIIBAgent"
                 },
                 "NetworkInterfaces": [
                     {
@@ -569,12 +793,131 @@
             },
             "Type": "AWS::EC2::Instance"
         },
+        "AgentSecurityGroup": {
+            "Properties": {
+                "GroupDescription": "Allow restricted-access to launched Instances",
+                "SecurityGroupEgress": [
+                    {
+                        "CidrIp": "0.0.0.0/0",
+                        "Description": "All Traffic",
+                        "FromPort": "-1",
+                        "IpProtocol": "-1",
+                        "ToPort": "-1"
+                    }
+                ],
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": {
+                            "Ref": "VPCCIDR"
+                        },
+                        "Description": "HTTP from VPC",
+                        "FromPort": "80",
+                        "IpProtocol": "tcp",
+                        "ToPort": "80"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "VPCCIDR"
+                        },
+                        "Description": "HTTPS from VPC",
+                        "FromPort": "443",
+                        "IpProtocol": "tcp",
+                        "ToPort": "443"
+                    },
+                    {
+                        "CidrIp": {
+                            "Ref": "VPCCIDR"
+                        },
+                        "Description": "SSH from VPC",
+                        "FromPort": "22",
+                        "IpProtocol": "tcp",
+                        "ToPort": "22"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "KAIIBAgentSG"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::SecurityGroup"
+        },
+        "Nat": {
+            "DependsOn": "ControllerManagementSubnet",
+            "Properties": {
+                "AllocationId": {
+                    "Fn::GetAtt": [
+                        "NatEip",
+                        "AllocationId"
+                    ]
+                },
+                "SubnetId": {
+                    "Ref": "ControllerManagementSubnet"
+                }
+            },
+            "Type": "AWS::EC2::NatGateway"
+        },
+        "NatEip": {
+            "Properties": {
+                "Domain": "vpc"
+            },
+            "Type": "AWS::EC2::EIP"
+        },
+        "NatRoute": {
+            "DependsOn": "ControllerManagementSubnet",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NatGatewayId": {
+                    "Ref": "Nat"
+                },
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
         "ClientAgent": {
             "Condition": "CreateClientAgent",
             "DependsOn": [
                 "clieth0",
                 "clieth1",
-                "CyPerfUI"
+                "KAIIBUI"
             ],
             "Properties": {
                 "BlockDeviceMappings": [
@@ -596,19 +939,13 @@
                     ]
                 },
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "RegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "AMIxAGENT"
-                    ]
+                    "Ref": "AgentAMI"
                 },
                 "InstanceType": {
-                    "Ref": "InstanceTypeForCyPerfAgent"
+                    "Ref": "InstanceTypeForKAIIBAgent"
                 },
                 "KeyName": {
-                    "Ref": "KeyNameForCyPerfAgent"
+                    "Ref": "KeyNameForKAIIBAgent"
                 },
                 "NetworkInterfaces": [
                     {
@@ -638,7 +975,7 @@
                                         [
                                             {
                                                 "Fn::GetAtt": [
-                                                    "CyPerfUI",
+                                                    "KAIIBUI",
                                                     "PrivateIp"
                                                 ]
                                             }
@@ -724,119 +1061,110 @@
             },
             "Type": "AWS::EC2::Instance"
         },
-        "ServerAgent": {
-            "Condition": "CreateServerAgent",
-            "DependsOn": [
-                "svreth0",
-                "svreth1",
-                "CyPerfUI"
-            ],
+        "PrivateRouteTable": {
             "Properties": {
-                "BlockDeviceMappings": [
+                "Tags": [
                     {
-                        "DeviceName": "/dev/sda1",
-                        "Ebs": {
-                            "VolumeSize": "8",
-                            "DeleteOnTermination": true
-                        }
-                    }
-                ],
-                "IamInstanceProfile": {
-                    "Fn::If": [
-                        "FetchTagsForAgent",
-                        {
-                            "Ref": "EC2InstanceProfile"
-                        },
-                        ""
-                    ]
-                },
-                "ImageId": {
-                    "Fn::FindInMap": [
-                        "RegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "AMIxAGENT"
-                    ]
-                },
-                "InstanceType": {
-                    "Ref": "InstanceTypeForCyPerfAgent"
-                },
-                "KeyName": {
-                    "Ref": "KeyNameForCyPerfAgent"
-                },
-                "NetworkInterfaces": [
-                    {
-                        "DeviceIndex": "0",
-                        "NetworkInterfaceId": {
-                            "Ref": "svreth0"
-                        }
-                    },
-                    {
-                        "DeviceIndex": "1",
-                        "NetworkInterfaceId": {
-                            "Ref": "svreth1"
-                        }
-                    }
-                ],
-                "UserData": {
-                    "Fn::Base64": {
-                        "Fn::Join": [
-                            "",
-                            [
-                                "#!/bin/bash -xe\n",
-                                "cd /opt/keysight/tiger/active/bin/\n",
-                                "sh /opt/keysight/tiger/active/bin/Appsec_init ",
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            {
-                                                "Fn::GetAtt": [
-                                                    "CyPerfUI",
-                                                    "PrivateIp"
-                                                ]
-                                            }
-                                        ]
-                                    ]
-                                },
-                                " --username \"",
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            {
-                                                "Ref": "AuthUsername"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "\" --password \"",
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            {
-                                                "Ref": "AuthPassword"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "\" --fingerprint \"",
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            {
-                                                "Ref": "AuthFingerprint"
-                                            }
-                                        ]
-                                    ]
-                                },
-                                "\" >> /var/log/Appsec_init.log\n"
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "private-rt"
+                                ]
                             ]
-                        ]
+                        }
                     }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "AgentControlSubnetRouteTable": {
+            "DependsOn": "AgentControlSubnet",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "AgentControlSubnet"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "AgentTestSubnetRouteTable": {
+            "DependsOn": "AgentTestSubnet",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "AgentTestSubnet"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "PublicRouteTable": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "public-rt"
+                                ]
+                            ]
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "ControllerManagementSubnetRouteTable": {
+            "DependsOn": "ControllerManagementSubnet",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "SubnetId": {
+                    "Ref": "ControllerManagementSubnet"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "RouteToInternet": {
+            "DependsOn": "InternetGatewayAttachment",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "InternetGateway"
+                },
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "AgentControlSubnet": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AvailabilityZone"
+                },
+                "CidrBlock": {
+                    "Ref": "AgentControlCIDR"
                 },
                 "Tags": [
                     {
@@ -848,7 +1176,7 @@
                                     {
                                         "Ref": "AWS::StackName"
                                     },
-                                    "ServerAgent"
+                                    "Agent Control Subnet"
                                 ]
                             ]
                         }
@@ -875,9 +1203,242 @@
                             "Ref": "Username"
                         }
                     }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "AgentTestSubnet": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AvailabilityZone"
+                },
+                "CidrBlock": {
+                    "Ref": "AgentTestCIDR"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "Agent Test Subnet"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "ControllerManagementSubnet": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "AvailabilityZone"
+                },
+                "CidrBlock": {
+                    "Ref": "ControllerNetworkCIDR"
+                },
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "-",
+                                [
+                                    {
+                                        "Ref": "AWS::StackName"
+                                    },
+                                    "Controller Management Subnet"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "VPC": {
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "VPCCIDR"
+                },
+                "EnableDnsHostnames": "true",
+                "EnableDnsSupport": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Ref": "AWS::StackName"
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
                 ]
             },
-            "Type": "AWS::EC2::Instance"
+            "Type": "AWS::EC2::VPC"
+        },
+        "VPCFlowLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+                "LogGroupName": {
+                    "Fn::Sub": "${AWS::StackName}-vpc-flow-logs"
+                },
+                "RetentionInDays": 90
+            }
+        },
+        "VPCFlowLog": {
+            "Type": "AWS::EC2::FlowLog",
+            "Properties": {
+                "DeliverLogsPermissionArn": {
+                    "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/ks-infosec-vpcflow"
+                },
+                "LogDestinationType": "cloud-watch-logs",
+                "LogGroupName": {
+                    "Ref": "VPCFlowLogGroup"
+                },
+                "ResourceId": {
+                    "Ref": "VPC"
+                },
+                "ResourceType": "VPC",
+                "TrafficType": "ALL",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Sub": "${AWS::StackName}-vpc-flow-log"
+                        }
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ]
+            }
+        },
+        "VPCxDhcpOptions": {
+            "Properties": {
+                "DomainName": "VPCxDhcpOptions",
+                "DomainNameServers": [
+                    "8.8.8.8",
+                    "8.8.4.4",
+                    "AmazonProvidedDNS"
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "KAIIBVPCx"
+                    },
+                    {
+                        "Key": "Project",
+                        "Value": {
+                            "Ref": "Project"
+                        }
+                    },
+                    {
+                        "Key": "Options",
+                        "Value": {
+                            "Fn::FindInMap": [
+                                "VariableMap",
+                                "global",
+                                "OPTIONSxTAG"
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Owner",
+                        "Value": {
+                            "Ref": "Username"
+                        }
+                    }
+                ]
+            },
+            "Type": "AWS::EC2::DHCPOptions"
         },
         "clieth0": {
             "Condition": "CreateClientAgent",
@@ -987,120 +1548,12 @@
             },
             "Type": "AWS::EC2::NetworkInterface"
         },
-        "svreth0": {
-            "Condition": "CreateServerAgent",
-            "Properties": {
-                "Description": "Server Agent eth0/ens4",
-                "GroupSet": [
-                    {
-                        "Ref": "AgentSecurityGroup"
-                    }
-                ],
-                "SourceDestCheck": "true",
-                "SubnetId": {
-                    "Ref": "AgentControlSubnet"
-                },
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "-",
-                                [
-                                    {
-                                        "Ref": "AWS::StackName"
-                                    },
-                                    "SA-Interface"
-                                ]
-                            ]
-                        }
-                    },
-                    {
-                        "Key": "Project",
-                        "Value": {
-                            "Ref": "Project"
-                        }
-                    },
-                    {
-                        "Key": "Options",
-                        "Value": {
-                            "Fn::FindInMap": [
-                                "VariableMap",
-                                "global",
-                                "OPTIONSxTAG"
-                            ]
-                        }
-                    },
-                    {
-                        "Key": "Owner",
-                        "Value": {
-                            "Ref": "Username"
-                        }
-                    }
-                ]
-            },
-            "Type": "AWS::EC2::NetworkInterface"
-        },
-        "svreth1": {
-            "Condition": "CreateServerAgent",
-            "Properties": {
-                "Description": "Server Agent eth1/ens5",
-                "GroupSet": [
-                    {
-                        "Ref": "AgentSecurityGroup"
-                    }
-                ],
-                "SourceDestCheck": "true",
-                "SubnetId": {
-                    "Ref": "AgentTestSubnet"
-                },
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "-",
-                                [
-                                    {
-                                        "Ref": "AWS::StackName"
-                                    },
-                                    "SA-Interface"
-                                ]
-                            ]
-                        }
-                    },
-                    {
-                        "Key": "Project",
-                        "Value": {
-                            "Ref": "Project"
-                        }
-                    },
-                    {
-                        "Key": "Options",
-                        "Value": {
-                            "Fn::FindInMap": [
-                                "VariableMap",
-                                "global",
-                                "OPTIONSxTAG"
-                            ]
-                        }
-                    },
-                    {
-                        "Key": "Owner",
-                        "Value": {
-                            "Ref": "Username"
-                        }
-                    }
-                ]
-            },
-            "Type": "AWS::EC2::NetworkInterface"
-        },
         "mdweth0": {
             "Properties": {
-                "Description": "MDW eth0",
+                "Description": "Controller eth0",
                 "GroupSet": [
                     {
-                        "Ref": "CyPerfUISecurityGroup"
+                        "Ref": "KAIIBUISecurityGroup"
                     }
                 ],
                 "SourceDestCheck": "true",
@@ -1117,7 +1570,7 @@
                                     {
                                         "Ref": "AWS::StackName"
                                     },
-                                    "MB-Interface"
+                                    "Controller-Interface"
                                 ]
                             ]
                         }

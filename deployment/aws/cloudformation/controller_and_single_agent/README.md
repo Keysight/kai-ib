@@ -1,61 +1,44 @@
-# Deploying the CyPerf in AWS for Controller and Agent Pair      
-## Introduction
-This solution uses a CloudFormation Template to deploy CyPerf Controller and two CyPerf Agents in an Amazon Virtual Private Cloud.
-There is a new VPC template, meaning the entire necessary resources will be created from scratch, including VPC, subnets, route table, Internet Gateway, Nat-gateway etc. 
-Existing VPC template, meaning entire network resources like VPC, subnets, route tables, IGW, Nat-Gateway including Security group are pre-exists. User will be able to select existing VPC, subnet and security group during deployment.
-See the Template Parameters Section for more details. Each agent has two interfaces. One is Management interface and other is Test interface. Agent communicate with Controller using Management interface. CyPerf test traffic flows through Test interface.  In this deployment first or default interface of Agent is set as test interface and second interface is set as management interface. So, in this deployment test traffic get exchanges between first interface of both the agents.
+# Deploying KAI-IB Controller and Agent in AWS
 
-## Topology Diagram
-![cyperf_controller_and_agent_pair](cyperf_controller_and_agent_pair.jpg)
+## Introduction
+
+This solution uses a CloudFormation Template to deploy a KAI-IB Controller and a KAI-IB Client Agent in an Amazon Virtual Private Cloud.
+
+This is a new VPC template, meaning all necessary resources will be created from scratch, including VPC, subnets, route tables, Internet Gateway, NAT Gateway, security groups, and VPC Flow Logs.
+
+See the Template Parameters section for more details. The Client Agent has two interfaces. The first interface (eth0) is used for control plane communication with the Controller. The second interface (eth1) is used for test traffic. The agent automatically registers with the Controller on launch.
 
 ## Template Parameters
 
-The following table lists the parameters for this deployment in **New VPC**.
+The following table lists the parameters for this deployment.
 
-| **Parameter label (name)**                  | **Default**            | **Description**  |
-| ----------------------- | ----------------- | ----- |
-| Stack name            | Requires input   | Specify the deployment stack name. Please select the stack name as per the following specifications: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-parameters.html. The stack name can contain a maximum of 9 alphanumeric characters. Amazon imposes this character length limit because the name of other resources from this stack starts with the stack name, and the maximum resource name length is 64 characters. If you are deploying the Quick Start multiple times in the same environment, make sure to use a unique name. |
-| Username      | Requires input       | Email ID of the stack owner. All resources created by this stack are tagged with Username. |
-| Project | Requires input | The name of the project where this stack will be used. |
-| Availability Zones | Requires input | Availability Zone to use for the subnets in the VPC. Select Availability Zone from the drop-down list. |
-| VPC | 172.16.0.0/16 |The CIDR block for the VPC. |
-| Management Subnet for CyPerf Controller | 172.16.1.0/24 | This subnet is attached to CyPerf Controller and would be used to access the CyPerf Controllers' UI. |
-| Instance Type for CyPerf Agents | c5.2xlarge | The EC2 instance type to use for the Keysight CyPerf Agent instances. For a compute-based instance, it is recommended to use at least c5.2xlarge instance type. |
-| SSH Key                   | Requires input            | Name of an existing EC2 KeyPair to enable SSH access to the CyPerf instances.  |
-| Control Subnet for CyPerf Agents                   | 172.16.2.0/24            | CyPerf agents will use this subnet for control plane communication with Controller.  |
-| Test Subnet for CyPerf Agents                   | 172.16.3.0/24            | CyPerf agents will use this subnet for test traffic.  |
-| AuthUsername                                        | `admin`                    | Username for agent to controller authentication.      |
-| AuthPassword                                        | `CyPerf&Keysight#1`       | Password for agent to controller authentication.      |
-| AuthFingerprint                                     |                          | Fingerprint for agent to controller authentication - OPTIONAL  |
-| Allowed Subnet for Security Group                   | 1.1.1.1/1           | Subnet range allowed to access deployed AWS resources. Execute `curl ifconfig.co` to know MyIP or google for “what is my IP”. Default value is dummy value. User must use proper subnet range.   |
+| **Parameter label (name)** | **Default** | **Description** |
+| --- | --- | --- |
+| Stack name | Requires input | Specify the deployment stack name. The stack name can contain a maximum of 9 alphanumeric characters. If you are deploying multiple times in the same environment, make sure to use a unique name. |
+| Username | Requires input | Email ID of the stack owner. All resources created by this stack are tagged with Username. |
+| Project | `KAIIB-AWS` | The name of the project where this stack will be used. |
+| Availability Zone | Requires input | Availability Zone to use for the subnets in the VPC. Select from the drop-down list. |
+| VPC | `172.16.0.0/16` | The CIDR block for the VPC. |
+| KAIIB Controller AMI ID | Requires input | The AMI ID of the KAI-IB Controller image for the selected region. |
+| Management Subnet for KAIIB Controller | `172.16.1.0/24` | This subnet is attached to the KAI-IB Controller and is used to access the Controller UI. |
+| KAIIB Agent AMI ID | Requires input | The AMI ID of the KAI-IB Agent image for the selected region. |
+| Deploy Client Agent | `yes` | Whether to deploy the Client Agent. Select `yes` or `no`. |
+| Display Agents by tags in KAIIB UI | `yes` | Creates an IAM role to allow agents to read EC2 tags for display in the Controller UI. Select `yes` or `no`. |
+| Instance Type for KAIIB Agents | `c5.2xlarge` | The EC2 instance type to use for the KAI-IB Agent instance. It is recommended to use at least `c5.2xlarge`. |
+| SSH Key | Requires input | Name of an existing EC2 KeyPair to enable SSH access to the KAI-IB instances. |
+| Control Subnet for KAIIB Agents | `172.16.2.0/24` | KAI-IB agents will use this subnet for control plane communication with the Controller. |
+| Test Subnet for KAIIB Agents | `172.16.3.0/24` | KAI-IB agents will use this subnet for test traffic. |
+| Authentication Username | `admin` | Username for agent to controller authentication. |
+| Authentication Password | `admin` | Password for agent to controller authentication. |
+| Authentication Fingerprint | | Fingerprint for agent to controller authentication - OPTIONAL. |
+| Allowed Subnet for Security Group | `1.1.1.1/1` | Subnet range allowed to access deployed AWS resources. Execute `curl ifconfig.co` to know your IP or google for "what is my IP". Default value is a dummy value. User must provide a proper subnet range. |
 
-The following table lists the parameters for this deployment in **Existing VPC**.
+## Post Deployment
 
-| **Parameter label (name)**                   | **Default**            | **Description**  |
-| ----------------------- | ----------------- | ----- |
-| Stack name            | Requires input   | Specify the deployment stack name. Please select the stack name as per the following specifications: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-parameters.html. The stack name can contain a maximum of 9 alphanumeric characters. Amazon imposes this character length limit because the name of other resources from this stack starts with the stack name, and the maximum resource name length is 64 characters. If you are deploying the Quick Start multiple times in the same environment, make sure to use a unique name. |
-| Username      | Requires input       | Email ID of the stack owner. All resources created by this stack are tagged with Username. |
-| Project | Requires input | The name of the project where this stack will be used. |
-| Availability Zones | Requires input | Availability Zone to use for the subnets in the VPC. Select Availability Zone from the drop-down list. |
-| VPC | 172.16.0.0/16 |The CIDR block for the VPC. |
-| Management Subnet for CyPerf Controller | Select subnet from drop down | Preferred Existing Management subnet for CyPerf Controller. This subnet is attached to CyPerf Controller and would be used to access the CyPerf Controllers' UI. |
-| Security Group of CyPerf Controller                   | Select security group from drop down            | Preferred Existing Security group of CyPerf Controller.  |
-| Instance Type for CyPerf Agents | c5.2xlarge | The EC2 instance type to use for the Keysight CyPerf Agent instances. For a compute-based instance, it is recommended to use at least c5.2xlarge instance type. |
-| SSH Key                   | Requires input            | Name of an existing EC2 KeyPair to enable SSH access to the CyPerf instances.  |
-| Control Subnet for CyPerf Agents                   | Select subnet from drop down            | Preferred Existing Control subnet for CyPerf Agent.  |
-| Test Subnet for CyPerf Agents                   | Select subnet from drop down            | Preferred Existing Test subnet for CyPerf Agent.  |
-| Authentication Username                                        | `admin`                    | Username for agent to controller authentication.      |
-| Authentication Password                                        | `CyPerf&Keysight#1`       | Password for agent to controller authentication.      |
-| Authentication Fingerprint                                     |                          | Fingerprint for agent to controller authentication - OPTIONAL  |
-| Security Group of CyPerf Agent                   | Select security group from drop down            | Preferred Existing Security group of CyPerf Agent.   |
+After successful deployment of the stack, follow the instructions below:
 
-
-## Post deployment
-
-After successful deployment of stack, flow bellow instructions
-
--	Go to EC2 Dashboard and look for the deployed instance
--	Select the Controller instance and check the public IP 
--	Open your browser and access CyPerf Controller UI with URL https://"Controller Public IP" (Default Username/Password: `admin`/`CyPerf&Keysight#1`)
--   Registered CyPerf agents should appear in Controller UI automatically.
--   CyPerf license needs to be procured for further usage. These licenses need to be configured at “Administration” followed by “License Manager” on CyPerf controller gear menu.
+- Go to the EC2 Dashboard and look for the deployed instances.
+- Select the Controller instance and note the public IP.
+- Open your browser and access the KAI-IB Controller UI with URL `https://<Controller Public IP>` (Default Username/Password: `admin`/`admin`).
+- The registered KAI-IB agent should appear in the Controller UI automatically.
+- A KAI-IB license needs to be procured for further usage. The license needs to be configured at **Administration** > **License Manager** in the Controller UI.
