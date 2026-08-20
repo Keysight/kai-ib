@@ -2,9 +2,11 @@
 
 # Introduction
 
-This is the Terraform approach for CyPerf Application and CyPerf Agents in different cloud providers.
+This is the Terraform approach for KAI-IB Application and KAI-IB Agent in AWS.
 
 All the necessary resources will be created from scratch, including VPC, subnets, route table, Internet Gateway, Nat-gateway etc.
+
+The deployment consists of one KAI-IB controller and one KAI-IB client agent.
 
 # Prerequisites
 
@@ -59,20 +61,22 @@ Using this method you can ensure that all further deployments will be done with 
 
 The following table lists the parameters for this deployment.
 
-| **Parameter label (name)**                  | **Default**            | **Description**  |
-| ----------------------- | ----------------- | ----- |
-| aws_access_key | Requires input | The AWS access key must be obtained using following specification https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html. |
-| aws_secret_key  | Requires input | The AWS secret key must be obtained using following specification https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html. |
-| aws_stack_name | Requires input |The AWS stack name. |
-| aws_auth_key | Requires input | Specify the AWS SSH key name. |
-| aws_allowed_cidr | ["0.0.0.0/0"] |List of ip allowed to access the deployed machines. |
-| aws_region            | us-east-2   | The AWS region for deployment. |
-| availability_zone      | us-east-2a       | The AWS availability zone for deployment. |
-| aws_mdw_machine_type   | c5.2xlarge   | The machine type used for deploying the CyPerf controller. |
-| aws_agent_machine_type    | c5.2xlarge   |The machine type used for deploying the CyPerf agent.  |
-| mdw_version   | keysight-cyperf-controller-26-0-0           | The CyPerf controller image version. |
-| agent_version       | keysight-cyperf-agent-26-0-0     | The CyPerf agent image version.   |
-| cyperf_release   | 26.0.0           | The version of the cyperf release. |   
+| **Parameter label (name)**                  | **Default**                       | **Description**                                                                                                                                          |
+| ----------------------- |-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| aws_access_key | Requires input                    | The AWS access key must be obtained using following specification https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html. |
+| aws_secret_key  | Requires input                    | The AWS secret key must be obtained using following specification https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html. |
+| aws_stack_name | Requires input                    | The AWS stack name.                                                                                                                                      |
+| aws_auth_key | Requires input                    | Specify the AWS SSH key name.                                                                                                                            |
+| aws_allowed_cidr_ipv4 | ["0.0.0.0/0"]                     | List of IPv4 allowed to access the deployed machines.                                                                                                    |
+| aws_allowed_cidr_ipv6 | ["::/0"]                          | List of IPv6 allowed to access the deployed machines.                                                                                                    |
+| stack_type | ipv4                              | Possible options: ipv4 / ipv6 / dual-stack.                                                                                                              |
+| aws_region            | us-east-2                         | The AWS region for deployment.                                                                                                                           |
+| availability_zone      | us-east-2a                        | The AWS availability zone for deployment.                                                                                                                |
+| aws_mdw_machine_type   | c5.2xlarge                        | The machine type used for deploying the KAI-IB controller.                                                                                               |
+| aws_agent_machine_type    | c5.2xlarge                        | The machine type used for deploying the KAI-IB agent.                                                                                                    |
+| mdw_version   | keysight-kai-ib-controller-26-0-0 | The KAI-IB controller image version.                                                                                                                     |
+| agent_version       | keysight-kai-ib-agent-26-0-0      | The KAI-IB agent image version.                                                                                                                          |
+| kai_ib_release   | 26.0.0                            | The version of the KAI-IB release.                                                                                                                       |
 
 ## Destruction
 

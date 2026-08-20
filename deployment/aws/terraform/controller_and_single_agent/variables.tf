@@ -60,8 +60,8 @@ variable "aws_agent_machine_type" {
 
 variable "mdw_version" {
   type        = string
-  default     = "keysight-cyperf-controller-26-0-0"
-  description = "Version for the cyperf controller"
+  default     = "keysight-kai-ib-controller-26-0-0"
+  description = "Version for the kai-ib controller"
 }
 
 variable "controller_username" {
@@ -72,18 +72,18 @@ variable "controller_username" {
 
 variable "controller_password" {
   type        = string
-  default     = "CyPerf&Keysight#1"
+  default     = "admin"
   description = "Controller's authentication password"
 }
 
 variable "agent_version" {
   type        = string
-  default     = "keysight-cyperf-agent-26-0-0"
-  description = "Version for the cyperf agent"
+  default     = "keysight-kai-ib-agent-26-0-0"
+  description = "Version for the kai-ib agent"
 }
 
-variable "cyperf_release" {
+variable "kai_ib_release" {
   type        = string
   default     = "26.0.0"
-  description = "The version of the cyperf release"
+  description = "The version of the kai-ib release"
 }

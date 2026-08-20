@@ -4,8 +4,8 @@ provider "aws" {
   region     = var.aws_region
 }
 
-data "aws_ssm_parameter" "cyperf_mdw_ami" {
-  name = "/aws/service/marketplace/prod-svag4bs7dtcbu/${var.cyperf_release}"
+data "aws_ssm_parameter" "kai_ib_mdw_ami" {
+  name = "/aws/service/marketplace/prod-vflb3tjr7ifpc/${var.kai_ib_release}"
 }
 
 locals {
@@ -14,11 +14,10 @@ locals {
   test_cidr          = "172.16.2.0/24"
   mdw_name           = "${var.aws_stack_name}-mdw-${var.mdw_version}"
   client_name        = "${var.aws_stack_name}-client-${var.agent_version}"
-  server_name        = "${var.aws_stack_name}-server-${var.agent_version}"
-  mdw_ip_address     = var.stack_type == "ipv4" ? "${aws_instance.aws_mdw.private_ip}" : "${aws_instance.aws_mdw.ipv6_addresses[0]}"
+  mdw_ip_address     = var.stack_type == "ipv6" ? "${aws_instance.aws_mdw.ipv6_addresses[0]}" : "${aws_instance.aws_mdw.private_ip}"
   agent_init_cli     = <<-EOF
                 #! /bin/bash
-                sudo sudo chmod 777 /var/log/
+                sudo chmod 777 /var/log/
                 sudo sh /opt/keysight/tiger/active/bin/Appsec_init ${local.mdw_ip_address} --username "${var.controller_username}" --password "${var.controller_password}">> /var/log/Appsec_init.log
     EOF
   firewall_cidr_ipv4 = concat(var.aws_allowed_cidr_ipv4, [local.main_cidr], [local.test_cidr])
@@ -63,16 +62,16 @@ resource "aws_security_group" "aws_agent_security_group" {
   vpc_id      = aws_vpc.aws_main_vpc.id
 }
 
-resource "aws_security_group" "aws_cyperf_security_group" {
+resource "aws_security_group" "aws_kai_ib_security_group" {
   name = "mdw-security-group"
   tags = {
-    Name = "${var.aws_stack_name}-cyperf-security-group"
+    Name = "${var.aws_stack_name}-kai-ib-security-group"
   }
   description = "MDW security group"
   vpc_id      = aws_vpc.aws_main_vpc.id
 }
 
-resource "aws_security_group_rule" "aws_cyperf_agent_ingress" {
+resource "aws_security_group_rule" "aws_kai_ib_agent_ingress" {
   type              = "ingress"
   from_port         = 0
   to_port           = 0
@@ -82,7 +81,7 @@ resource "aws_security_group_rule" "aws_cyperf_agent_ingress" {
   security_group_id = aws_security_group.aws_agent_security_group.id
 }
 
-resource "aws_security_group_rule" "aws_cyperf_agent_egress" {
+resource "aws_security_group_rule" "aws_kai_ib_agent_egress" {
   type              = "egress"
   from_port         = 0
   to_port           = 0
@@ -92,24 +91,24 @@ resource "aws_security_group_rule" "aws_cyperf_agent_egress" {
   security_group_id = aws_security_group.aws_agent_security_group.id
 }
 
-resource "aws_security_group_rule" "aws_cyperf_ui_ingress" {
+resource "aws_security_group_rule" "aws_kai_ib_ui_ingress" {
   type              = "ingress"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = local.firewall_cidr_ipv4
   ipv6_cidr_blocks  = local.firewall_cidr_ipv6
-  security_group_id = aws_security_group.aws_cyperf_security_group.id
+  security_group_id = aws_security_group.aws_kai_ib_security_group.id
 }
 
-resource "aws_security_group_rule" "aws_cyperf_ui_egress" {
+resource "aws_security_group_rule" "aws_kai_ib_ui_egress" {
   type              = "egress"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   ipv6_cidr_blocks  = ["::/0"]
-  security_group_id = aws_security_group.aws_cyperf_security_group.id
+  security_group_id = aws_security_group.aws_kai_ib_security_group.id
 }
 
 resource "aws_vpc_dhcp_options" "aws_main_vpc_dhcp_options" {
@@ -182,7 +181,7 @@ resource "aws_network_interface" "aws_mdw_interface" {
   }
   source_dest_check = true
   subnet_id         = aws_subnet.aws_management_subnet.id
-  security_groups   = [aws_security_group.aws_cyperf_security_group.id]
+  security_groups   = [aws_security_group.aws_kai_ib_security_group.id]
   ipv6_addresses    = var.stack_type == "ipv4" ? [] : [cidrhost(aws_subnet.aws_management_subnet.ipv6_cidr_block, 16)]
 }
 
@@ -196,28 +195,9 @@ resource "aws_network_interface" "aws_client_mgmt_interface" {
   ipv6_addresses    = var.stack_type == "ipv4" ? [] : [cidrhost(aws_subnet.aws_management_subnet.ipv6_cidr_block, 32)]
 }
 
-resource "aws_network_interface" "aws_server_mgmt_interface" {
-  tags = {
-    Name = "${var.aws_stack_name}-server-mgmt-interface"
-  }
-  security_groups   = [aws_security_group.aws_agent_security_group.id]
-  source_dest_check = true
-  subnet_id         = aws_subnet.aws_management_subnet.id
-  ipv6_addresses    = var.stack_type == "ipv4" ? [] : [cidrhost(aws_subnet.aws_management_subnet.ipv6_cidr_block, 48)]
-}
-
 resource "aws_network_interface" "aws_client_test_interface" {
   tags = {
     Name = "${var.aws_stack_name}-client-test-interface"
-  }
-  source_dest_check = true
-  subnet_id         = aws_subnet.aws_test_subnet.id
-  security_groups   = [aws_security_group.aws_agent_security_group.id]
-}
-
-resource "aws_network_interface" "aws_server_test_interface" {
-  tags = {
-    Name = "${var.aws_stack_name}-server-test-interface"
   }
   source_dest_check = true
   subnet_id         = aws_subnet.aws_test_subnet.id
@@ -229,16 +209,6 @@ resource "aws_eip" "mdw_public_ip" {
   instance                  = aws_instance.aws_mdw.id
   domain = "vpc"
   associate_with_private_ip = aws_instance.aws_mdw.private_ip
-  depends_on = [
-    aws_internet_gateway.aws_internet_gateway
-  ]
-}
-
-resource "aws_eip" "server_public_ip" {
-  count                     = var.stack_type == "ipv6" ? 0 : 1
-  network_interface         = aws_network_interface.aws_server_mgmt_interface.id
-  domain = "vpc"
-  associate_with_private_ip = aws_instance.aws_server_agent.private_ip
   depends_on = [
     aws_internet_gateway.aws_internet_gateway
   ]
@@ -260,7 +230,7 @@ resource "aws_instance" "aws_mdw" {
   }
 
 
-  ami           = data.aws_ssm_parameter.cyperf_mdw_ami.value
+  ami           = data.aws_ssm_parameter.kai_ib_mdw_ami.value
   instance_type = var.aws_mdw_machine_type
 
   root_block_device {
@@ -283,7 +253,7 @@ resource "aws_instance" "aws_client_agent" {
   tags = {
     Name = local.client_name
   }
-  ami           = "resolve:ssm:/aws/service/marketplace/prod-tild73tpfkqko/${var.cyperf_release}"
+  ami           = "resolve:ssm:/aws/service/marketplace/prod-zh5yxhkxzhmcc/${var.kai_ib_release}"
   instance_type = var.aws_agent_machine_type
 
   ebs_block_device {
@@ -310,39 +280,6 @@ resource "aws_instance" "aws_client_agent" {
   key_name = var.aws_auth_key
 }
 
-resource "aws_instance" "aws_server_agent" {
-  tags = {
-    Name = local.server_name
-  }
-
-  ami           = "resolve:ssm:/aws/service/marketplace/prod-tild73tpfkqko/${var.cyperf_release}"
-  instance_type = var.aws_agent_machine_type
-
-  ebs_block_device {
-    device_name           = "/dev/sda1"
-    volume_size           = "16"
-    delete_on_termination = true
-  }
-
-  network_interface {
-    network_interface_id = aws_network_interface.aws_server_mgmt_interface.id
-    device_index         = 0
-  }
-
-  network_interface {
-    network_interface_id = aws_network_interface.aws_server_test_interface.id
-    device_index         = 1
-  }
-
-  credit_specification {
-    cpu_credits = "unlimited"
-  }
-  user_data = local.agent_init_cli
-
-  key_name = var.aws_auth_key
-
-}
-
 output "mdw_detail" {
   value = {
     "name" : local.mdw_name,
@@ -352,18 +289,12 @@ output "mdw_detail" {
   }
 }
 
-output "agents_detail" {
+output "agent_detail" {
   value = [
     {
       "name" : local.client_name,
       "management_private_ip" : aws_instance.aws_client_agent.private_ip,
       "management_public_ip" : var.stack_type == "ipv6" ? aws_instance.aws_client_agent.ipv6_addresses[0] : aws_eip.client_public_ip[0].public_ip,
-      "type" : "aws"
-    },
-    {
-      "name" : local.server_name,
-      "management_private_ip" : aws_instance.aws_server_agent.private_ip,
-      "management_public_ip" : var.stack_type == "ipv6" ? aws_instance.aws_server_agent.ipv6_addresses[0] : aws_eip.server_public_ip[0].public_ip,
       "type" : "aws"
     }
   ]
