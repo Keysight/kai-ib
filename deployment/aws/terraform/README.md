@@ -2,7 +2,7 @@
 
 # Introduction
 
-This is the Terraform approach for CyPerf Application and CyPerf Agents in different cloud providers.
+This is the Terraform approach for KAI-IB Application and KAI-IB Agents in different cloud providers.
 
 All the necessary resources will be created from scratch, including VPC, subnets, route table, Internet Gateway, Nat-gateway etc.
 
@@ -41,7 +41,7 @@ terraform apply --auto-approve \
 -var aws_secret_key="key"
 
 
-### 2. Writing all the input variables in the terraform.tfvars before running terraform apply
+### 2. Writing all the input variables in terraform.tfvars before running terraform apply
 
 In the same folder, create a file named terraform.tfvars.
 
@@ -55,34 +55,18 @@ Using this method you can ensure that all further deployments will be done with 
 
 **terraform apply** , will look inside the file and match all the variable with the ones found in the variable.tf## Destruction
 
-### List of Supported CyPerf terraform scripts for AWS 
+### List of Supported KAI-IB terraform scripts for AWS 
 
-The following is a list of the current supported CyPerf terraform scripts. Click the links to view the README files.
+The following is a list of the current supported KAI-IB terraform scripts. Click the links to view the README files.
 
 ### I. [Controller and Agent Pair](controller_and_agent_pair):
  
 
 This template deploys:
 
-- One CyPerf Controller, in a public subnet.
+- One KAI-IB Controller, in a public subnet.
 
-- Two CyPerf Agents, both having two interfaces each. Both Agent interfaces are in a Private subnet. 
-
-### II. [Controller Proxy and Agent Pair](controller_proxy_and_agent_pair):
-
-
-This template deploys:
-
-- One CyPerf Controller Proxy, in a public subnet.
-
-- Two CyPerf Agents, both having two interfaces each. Both Agent interfaces are in a Private subnet. 
-
-### III. [Controller Only](controller_only):
-
-
-This template deploys:
-
-- One CyPerf Controller, in a public subnet.
+- One KAI-IB Agent, having two interfaces. The Agent interfaces are in a Private subnet. 
 
 ## Destruction
 
@@ -95,7 +79,7 @@ If you used **terraform apply** in conjunction with **.tfvars** file, you will n
 
 ## Workspaces
 
-There are certain cases where multiple deployments are required using the same terraform template. To keep the previous deployments states intact, we recommend using the **workspace** feature of the terraform. This will help you to preserve the state of the previous deployments, allowing you to modify/destroy whenever you wish, while also enabling you to create multiple deployments of the same infrastructure.
+There are certain cases where multiple deployments are required using the same terraform template. To keep the previous deployments states intact, we recommend using the **workspace** feature of terraform. This will help you to preserve the state of the previous deployments, allowing you to modify/destroy whenever you wish, while also enabling you to create multiple deployments of the same infrastructure.
 
 
 **terraform workspace** has 5 main options

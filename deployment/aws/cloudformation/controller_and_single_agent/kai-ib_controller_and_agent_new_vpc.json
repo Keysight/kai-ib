@@ -178,7 +178,7 @@
         "VariableMap": {
             "global": {
                 "OPTIONSxTAG": "MANUAL",
-                "PROJECTxTAG": "KAIIB"
+                "PROJECTxTAG": "KAI-IB"
             }
         }
     },
@@ -206,7 +206,7 @@
                 },
                 {
                     "Label": {
-                        "default": "KAIIB Controller Configuration"
+                        "default": "KAI-IB Controller Configuration"
                     },
                     "Parameters": [
                         "ControllerAMI",
@@ -215,7 +215,7 @@
                 },
                 {
                     "Label": {
-                        "default": "KAIIB Agent Configuration"
+                        "default": "KAI-IB Agent Configuration"
                     },
                     "Parameters": [
                         "AgentAMI",
@@ -238,19 +238,19 @@
             ],
             "ParameterLabels": {
                 "ControllerAMI": {
-                    "default": "KAIIB Controller AMI ID for the selected region"
+                    "default": "KAI-IB Controller AMI ID for the selected region"
                 },
                 "AgentAMI": {
-                    "default": "KAIIB Agent AMI ID for the selected region"
+                    "default": "KAI-IB Agent AMI ID for the selected region"
                 },
                 "EC2RoleForTags": {
-                    "default": "Display Agents by tags in KAIIB UI"
+                    "default": "Display Agents by tags in KAI-IB UI"
                 },
                 "AvailabilityZone": {
                     "default": "Availability Zone"
                 },
                 "InstanceTypeForKAIIBAgent": {
-                    "default": "Instance Type for KAIIB Agents"
+                    "default": "Instance Type for KAI-IB Agents"
                 },
                 "KeyNameForKAIIBAgent": {
                     "default": "SSH Key"
@@ -259,16 +259,16 @@
                     "default": "Deploy Client Agent"
                 },
                 "ControllerNetworkCIDR": {
-                    "default": "Management Subnet for KAIIB Controller"
+                    "default": "Management Subnet for KAI-IB Controller"
                 },
                 "AgentControlCIDR": {
-                    "default": "Control Subnet for KAIIB Agents"
+                    "default": "Control Subnet for KAI-IB Agents"
                 },
                 "AllowedSubnet": {
                     "default": "Allowed Subnet for Security Group"
                 },
                 "AgentTestCIDR": {
-                    "default": "Test Subnet for KAIIB Agents"
+                    "default": "Test Subnet for KAI-IB Agents"
                 },
                 "VPCCIDR": {
                     "default": "VPC"
@@ -287,7 +287,7 @@
     },
     "Outputs": {
         "KAIIBUIINstanceDNS": {
-            "Description": "DNS name of KAIIB Controller instance",
+            "Description": "DNS name of KAI-IB Controller instance",
             "Value": {
                 "Fn::Join": [
                     "",
@@ -305,13 +305,13 @@
     },
     "Parameters": {
         "ControllerAMI": {
-            "Default": "KAIIB-Controller-AMI",
-            "Description": "KAIIB Controller AMI ID",
+            "Default": "KAI-IB-Controller-AMI",
+            "Description": "KAI-IB Controller AMI ID",
             "Type": "String"
         },
         "AgentAMI": {
-            "Default": "KAIIB-Agent-AMI",
-            "Description": "KAIIB Agent AMI ID",
+            "Default": "KAI-IB-Agent-AMI",
+            "Description": "KAI-IB Agent AMI ID",
             "Type": "String"
         },
         "AvailabilityZone": {
@@ -325,20 +325,20 @@
                 "c5n.9xlarge"
             ],
             "Default": "c5.2xlarge",
-            "Description": "KAIIB instance type",
+            "Description": "KAI-IB instance type",
             "Type": "String"
         },
         "KeyNameForKAIIBAgent": {
             "ConstraintDescription": "must be the name of an existing EC2 KeyPair",
-            "Default": "KAIIB-keypair",
-            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the KAIIB instances",
+            "Default": "KAI-IB-keypair",
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the KAI-IB instances",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
         "ControllerNetworkCIDR": {
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
             "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
             "Default": "172.16.1.0/24",
-            "Description": "This subnet is attached to KAIIB controller and would be used to access the KAIIB controllers' UI",
+            "Description": "This subnet is attached to KAI-IB controller and would be used to access the KAI-IB controllers' UI",
             "MaxLength": "18",
             "MinLength": "9",
             "Type": "String"
@@ -347,7 +347,7 @@
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
             "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
             "Default": "172.16.2.0/24",
-            "Description": "KAIIB agents will use this subnet for control plane communication with controller",
+            "Description": "KAI-IB agents will use this subnet for control plane communication with controller",
             "MaxLength": "18",
             "MinLength": "9",
             "Type": "String"
@@ -362,7 +362,7 @@
             "Type": "String"
         },
         "Project": {
-            "Default": "KAIIB-AWS",
+            "Default": "KAI-IB-AWS",
             "Description": "Project Name",
             "Type": "String"
         },
@@ -370,7 +370,7 @@
             "AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
             "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x.",
             "Default": "172.16.3.0/24",
-            "Description": "KAIIB agents will use this subnet for test traffic",
+            "Description": "KAI-IB agents will use this subnet for test traffic",
             "MaxLength": "18",
             "MinLength": "9",
             "Type": "String"
@@ -400,7 +400,7 @@
             "ConstraintDescription": "must specify yes or no."
         },
         "EC2RoleForTags": {
-            "Description": "Display Agents by tags in KAIIB UI",
+            "Description": "Display Agents by tags in KAI-IB UI",
             "Default": "yes",
             "Type": "String",
             "AllowedValues": [
@@ -689,7 +689,7 @@
                                     {
                                         "Ref": "AWS::StackName"
                                     },
-                                    "KAIIBUISG"
+                                    "KAI-IBUISG"
                                 ]
                             ]
                         }
@@ -844,7 +844,7 @@
                                     {
                                         "Ref": "AWS::StackName"
                                     },
-                                    "KAIIBAgentSG"
+                                    "KAI-IBAgentSG"
                                 ]
                             ]
                         }
@@ -1412,7 +1412,7 @@
                 "Tags": [
                     {
                         "Key": "Name",
-                        "Value": "KAIIBVPCx"
+                        "Value": "KAI-IBVPCx"
                     },
                     {
                         "Key": "Project",

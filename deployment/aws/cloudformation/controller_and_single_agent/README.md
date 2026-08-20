@@ -16,18 +16,18 @@ The following table lists the parameters for this deployment.
 | --- | --- | --- |
 | Stack name | Requires input | Specify the deployment stack name. The stack name can contain a maximum of 9 alphanumeric characters. If you are deploying multiple times in the same environment, make sure to use a unique name. |
 | Username | Requires input | Email ID of the stack owner. All resources created by this stack are tagged with Username. |
-| Project | `KAIIB-AWS` | The name of the project where this stack will be used. |
+| Project | `KAI-IB-AWS` | The name of the project where this stack will be used. |
 | Availability Zone | Requires input | Availability Zone to use for the subnets in the VPC. Select from the drop-down list. |
 | VPC | `172.16.0.0/16` | The CIDR block for the VPC. |
-| KAIIB Controller AMI ID | Requires input | The AMI ID of the KAI-IB Controller image for the selected region. |
-| Management Subnet for KAIIB Controller | `172.16.1.0/24` | This subnet is attached to the KAI-IB Controller and is used to access the Controller UI. |
-| KAIIB Agent AMI ID | Requires input | The AMI ID of the KAI-IB Agent image for the selected region. |
+| KAI-IB Controller AMI ID | Requires input | The AMI ID of the KAI-IB Controller image for the selected region. |
+| Management Subnet for KAI-IB Controller | `172.16.1.0/24` | This subnet is attached to the KAI-IB Controller and is used to access the Controller UI. |
+| KAI-IB Agent AMI ID | Requires input | The AMI ID of the KAI-IB Agent image for the selected region. |
 | Deploy Client Agent | `yes` | Whether to deploy the Client Agent. Select `yes` or `no`. |
-| Display Agents by tags in KAIIB UI | `yes` | Creates an IAM role to allow agents to read EC2 tags for display in the Controller UI. Select `yes` or `no`. |
-| Instance Type for KAIIB Agents | `c5.2xlarge` | The EC2 instance type to use for the KAI-IB Agent instance. It is recommended to use at least `c5.2xlarge`. |
+| Display Agents by tags in KAI-IB UI | `yes` | Creates an IAM role to allow agents to read EC2 tags for display in the Controller UI. Select `yes` or `no`. |
+| Instance Type for KAI-IB Agents | `c5.2xlarge` | The EC2 instance type to use for the KAI-IB Agent instance. It is recommended to use at least `c5.2xlarge`. |
 | SSH Key | Requires input | Name of an existing EC2 KeyPair to enable SSH access to the KAI-IB instances. |
-| Control Subnet for KAIIB Agents | `172.16.2.0/24` | KAI-IB agents will use this subnet for control plane communication with the Controller. |
-| Test Subnet for KAIIB Agents | `172.16.3.0/24` | KAI-IB agents will use this subnet for test traffic. |
+| Control Subnet for KAI-IB Agents | `172.16.2.0/24` | KAI-IB agents will use this subnet for control plane communication with the Controller. |
+| Test Subnet for KAI-IB Agents | `172.16.3.0/24` | KAI-IB agents will use this subnet for test traffic. |
 | Authentication Username | `admin` | Username for agent to controller authentication. |
 | Authentication Password | `admin` | Password for agent to controller authentication. |
 | Authentication Fingerprint | | Fingerprint for agent to controller authentication - OPTIONAL. |
