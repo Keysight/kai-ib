@@ -137,7 +137,7 @@ While deploying Agent, user needs to generate or needs to reuse ssh key pair.
 
 SSH to KAI-IB agent with public ssh-key
 
-``` ssh -i <ssh public key> cyperf@<agent's management ip>```
+``` ssh -i <ssh public key> kaiib@<agent's management ip>```
 
 Use the KAI-IB CLI command 'kaiibagent' to configure the required parameters.
 
