@@ -4,7 +4,7 @@
 
 This solution uses a CloudFormation Template to deploy a KAI-IB Controller and a KAI-IB Client Agent in an Amazon Virtual Private Cloud.
 
-This is a new VPC template, meaning all necessary resources will be created from scratch, including VPC, subnets, route tables, Internet Gateway, NAT Gateway, security groups, and VPC Flow Logs.
+This is a new VPC template, meaning all necessary resources will be created from scratch, including VPC, subnets, route tables, Internet Gateway, NAT Gateway, security groups, and VPC Flow Logs. The Controller and Agent AMIs are automatically selected based on the AWS region where the stack is deployed.
 
 See the Template Parameters section for more details. The Client Agent has two interfaces. The first interface (eth0) is used for control plane communication with the Controller. The second interface (eth1) is used for test traffic. The agent automatically registers with the Controller on launch.
 
@@ -19,9 +19,7 @@ The following table lists the parameters for this deployment.
 | Project | `KAI-IB-AWS` | The name of the project where this stack will be used. |
 | Availability Zone | Requires input | Availability Zone to use for the subnets in the VPC. Select from the drop-down list. |
 | VPC | `172.16.0.0/16` | The CIDR block for the VPC. |
-| KAI-IB Controller AMI ID | Requires input | The AMI ID of the KAI-IB Controller image for the selected region. |
 | Management Subnet for KAI-IB Controller | `172.16.1.0/24` | This subnet is attached to the KAI-IB Controller and is used to access the Controller UI. |
-| KAI-IB Agent AMI ID | Requires input | The AMI ID of the KAI-IB Agent image for the selected region. |
 | Deploy Client Agent | `yes` | Whether to deploy the Client Agent. Select `yes` or `no`. |
 | Display Agents by tags in KAI-IB UI | `yes` | Creates an IAM role to allow agents to read EC2 tags for display in the Controller UI. Select `yes` or `no`. |
 | Instance Type for KAI-IB Agents | `c5.2xlarge` | The EC2 instance type to use for the KAI-IB Agent instance. It is recommended to use at least `c5.2xlarge`. |
