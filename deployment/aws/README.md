@@ -15,12 +15,12 @@ Control subnet should reside behind NAT gateway, if Agents need to reach outside
 7.	If necessary, request a service limit increase for the **Amazon EC2 c5.2xlarge** instance type (or the instance type you are planning to use for the Keysight KAI-IB Agent instances). You might need to do this if you have an existing deployment that uses the same instance type, and you have exceeded the [default limit](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
 
 ## Step 2: Subscribe to the AMIs Used by the Manual Deployment
-This manual deployment uses publicly available Keysight KAI-IB Controller and Agent AMIs.
+This manual deployment uses publicly Marketplace available Keysight KAI-IB Controller and Agent AMIs.
 The following AMIs are available for KAI-IB 26.0.0 release.
 
--	keysight-kaiib-controller-26-0-0
+-	keysight-kai-ib-controller
 
--	keysight-kaiib-agent-26-0-0
+-	keysight-kai-ib-agent
 
 Before template deployment, subscribe to the required Keysight KAI-IB marketplace product version from [AWS Marketplace](https://aws.amazon.com/marketplace).
 
@@ -31,7 +31,7 @@ You are responsible for the cost of the AWS services used while running this man
 Keysight KAI-IB license needs to be procured for further usage. These licenses need to be configured at **"Administration" -> "License Manager"** on KAI-IB controller gear menu. For further details, see the pricing pages for each AWS service you will be using in this manual deployment guide. Prices are subject to change.
 
 1.	In the AWS console, select **EC2** service, followed by **Instances** and **Launch Instance**.
-2.	Go to **Community AMIs** and select **"keysight-kaiib-controller-26-0-0"**. 
+2.	Go to **Community AMIs** and select **"keysight-kai-ib-controller"**. 
 3.	Select Instance Type **"c5.2xlarge"** and move next. 
 4.	Select your preferred **VPC**, preferred public subnet in that **VPC** and move next. 
 5.	Keep default storage size **100 GiB** and move next. 
